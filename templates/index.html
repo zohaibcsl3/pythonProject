@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Email Sender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Send Bulk Emails</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="sender_email">Gmail Username (Email):</label>
+            <input type="email" name="sender_email" required>
+
+            <label for="password">Gmail Password:</label>
+            <input type="password" name="password" required>
+
+            <label for="to">To (comma-separated emails):</label>
+            <input type="text" name="to" required>
+
+            <label for="cc">CC (comma-separated emails):</label>
+            <input type="text" name="cc">
+
+            <label for="bcc">BCC (comma-separated emails):</label>
+            <input type="text" name="bcc">
+
+            <label for="subject">Subject:</label>
+            <input type="text" name="subject" required>
+
+            <label for="body">Body:</label>
+            <textarea name="body" required></textarea>
+
+            <label for="attachments">Attachments:</label>
+            <input type="file" name="attachments" multiple>
+
+            <button type="submit">Send Email</button>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
